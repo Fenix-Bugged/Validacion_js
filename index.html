@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <h1>Bienvenido al Registro de Usuario</h1>
+
+    <form id="registroForm">
+      <h2>Formulario de Registro</h2>
+
+      <label>Nombre:</label>
+      <input type="text" id="nombre" required />
+      <small id="error-nombre" class="error"></small>
+
+      <label>Apellido:</label>
+      <input type="text" id="apellido" required />
+      <small id="error-apellido" class="error"></small>
+
+      <label>Email:</label>
+      <input type="email" id="email" required />
+      <small id="error-email" class="error"></small>
+
+      <label>Edad:</label>
+      <input type="number" id="edad" min="1" required />
+      <small id="error-edad" class="error"></small>
+
+      <label>Fecha de nacimiento:</label>
+      <input type="date" id="fecha" required />
+      <small id="error-fecha" class="error"></small>
+
+      <label>Género:</label>
+      <select id="genero" required>
+        <option value="">Seleccionar...</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <small id="error-genero" class="error"></small>
+
+      <label>País:</label>
+      <input type="text" id="pais" required />
+      <small id="error-pais" class="error"></small>
+
+      <label for="descripcion">Descripción personal:</label>
+      <textarea id="descripcion" maxlength="150"></textarea>
+      <div class="contador"><span id="contador">0</span>/150 caracteres</div>
+      <small id="error-descripcion" class="error"></small>
+
+      <div class="terminos">
+        <input type="checkbox" id="terminos" required />
+        <label for="terminos">Acepto los términos y condiciones</label>
+        <small id="error-terminos" class="error"></small>
+      </div>
+
+      <div class="botones">
+        <button type="button" id="btnEnviar">Enviar</button>
+        <button type="reset" id="btnBorrar">Borrar</button>
+      </div>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>

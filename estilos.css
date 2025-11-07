@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #002950, #01022b);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+}
+
+h1 {
+  background-color: #00025a;
+  color: rgb(255, 255, 255);
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+form {
+  background-color: #000000;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(59, 59, 59, 0.452);
+  margin-top: 30px;
+  width: 300px;
+  color:rgb(253, 253, 253)
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 7px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #888888;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.terminos {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  background-color: #06005a;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  background-color: #0000cc;
+}
+.contador {
+  text-align: right;
+  font-size: 12px;
+  color: #ffffff;
+  margin-top: 3px;
+}
