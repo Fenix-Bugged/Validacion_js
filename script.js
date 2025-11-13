@@ -3,11 +3,9 @@ const descripcion = document.getElementById("descripcion");
 const btnenviar = document.getElementById("btnEnviar");
 const btnborrar = document.getElementById("btnBorrar");
 const contador = document.getElementById("contador");
+const barra = document.getElementById("barra");
 
-//  Actualiza contador de caracteres
-descripcion.addEventListener("input", () => {
-  contador.textContent = descripcion.value.length;
-});
+//  (El contador se inicializa más abajo junto con la barra de progreso)
 
 //  Evento principal: validar y descargar JSON
 btnenviar.addEventListener("click", validarydescargar);
@@ -17,6 +15,7 @@ btnborrar.addEventListener("click", () => {
   form.reset();
   contador.textContent = "0";
   document.querySelectorAll(".error").forEach((e) => (e.textContent = ""));
+  if (barra) barra.style.width = "0%";
 });
 
 //  Función principal de validación y descarga
@@ -30,11 +29,12 @@ function validarydescargar(e) {
   const nombre = document.getElementById("nombre").value.trim();
   const apellido = document.getElementById("apellido").value.trim();
   const email = document.getElementById("email").value.trim();
-  const edad = document.getElementById("edad").value.trim();
+  const edadValue = document.getElementById("edad").value.trim();
+  const edad = edadValue === "" ? "" : Number(edadValue);
   const fecha = document.getElementById("fecha").value.trim();
   const genero = document.getElementById("genero").value;
   const pais = document.getElementById("pais").value.trim();
-  const descripcion = document.getElementById("descripcion").value.trim();
+  const descripcionText = document.getElementById("descripcion").value.trim();
   const terminos = document.getElementById("terminos").checked;
 
   // Validaciones básicas
@@ -54,7 +54,7 @@ if (email === "" || !email.includes("@")) {
   valido = false;
 }
 
-if (edad === "" || edad < 1 || edad > 120) {
+if (edad === "" || isNaN(edad) || edad < 1 || edad > 120) {
   document.getElementById("error-edad").textContent = "Ingrese una edad válida.";
   valido = false;
 }
@@ -74,7 +74,7 @@ if (pais === "") {
   valido = false;
 }
 
-if (descripcion === "") {
+if (descripcionText === "") {
   document.getElementById("error-descripcion").textContent = "Debe escribir una breve descripción personal.";
   valido = false;
 }
@@ -94,7 +94,7 @@ if (!terminos) {
       FechaNacimiento: fecha,
       Genero: genero,
       País: pais,
-      Descripción: descripcion,
+      Descripción: descripcionText,
     };
 
     alert("✅ Formulario verificado correctamente. Nosotros lo llamamos");
@@ -108,4 +108,62 @@ if (!terminos) {
     a.click();
     URL.revokeObjectURL(url);
   }
+}
+
+
+// ====== VARIABLES =======
+const campos = [
+  "nombre",
+  "apellido",
+  "email",
+  "edad",
+  "fecha",
+  "genero",
+  "pais",
+  "descripcion",
+  "terminos"
+];
+// (las referencias a form/descripcion/contador/barra ya están declaradas arriba)
+
+// ====== ACTUALIZAR PROGRESO =======
+function actualizarProgreso() {
+  let completados = 0;
+  const total = campos.length - 1; // Excluir términos y condiciones
+
+  campos.forEach((id) => {
+    const campo = document.getElementById(id);
+
+    if (campo && campo.type !== "checkbox") {
+      if (campo.value && campo.value.trim() !== "") {
+        completados++;
+      }
+    }
+  });
+
+  const porcentaje = Math.round((completados / total) * 100);
+  if (barra) {
+    barra.style.width = porcentaje + "%";
+    barra.textContent = porcentaje + "%";
+  }
+}
+
+// ====== EVENTOS PARA ACTUALIZAR LA BARRA =======
+campos.forEach((id) => {
+  const campo = document.getElementById(id);
+  if (campo) {
+    campo.addEventListener("input", actualizarProgreso);
+    campo.addEventListener("change", actualizarProgreso);
+  }
+});
+
+// ====== CONTADOR DE DESCRIPCIÓN =======
+descripcion.addEventListener("input", () => {
+  contador.textContent = descripcion.value.length;
+  actualizarProgreso();
+});
+
+//reinicar  barra
+function resetarFormulario()  {
+  if (barra) barra.style.width = "0%";
+  if (contador) contador.textContent = "0";
 }
